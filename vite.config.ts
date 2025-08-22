@@ -5,9 +5,12 @@ import path from 'node:path'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
+  optimizeDeps:{
+    include: ['@emotion/styled']
+  },
   resolve:{
     alias:{
-      '@': path.resolve(__dirname, '/src')
+      '@': path.resolve(__dirname, './src')
     }
   }
 })
