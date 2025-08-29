@@ -58,7 +58,8 @@ return(
       <CardComponent>
         <CustomChart labels={['Jan', 'Fev', 'Mar', 'Abr', 'Mai']}
          data={[1000.12, 2456.54, 654.89, 754.89, 354.58]} 
-         type='bar'  />
+         type='bar'
+         />
       </CardComponent>
    </Container>
      
