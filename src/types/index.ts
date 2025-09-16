@@ -1,12 +1,13 @@
-export type * from './highlights'
-export type * from './newsData'
-export type * from './starsData'
 export type * from './appThemeContext';
 export type * from './AvatarsList1';
 export type * from './CustomChart1';
 export type * from './customTable';
 export type * from './decodedJwt'
 export type * from './formComponent';
+export type * from './highlights'
 export type * from './loginData';
+export type * from './newsData'
+export type * from './profileData'
+export type * from './starsData'
 export type * from './theme';
 export type * from './typographies';
