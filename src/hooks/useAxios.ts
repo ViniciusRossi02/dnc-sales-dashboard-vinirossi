@@ -55,7 +55,7 @@ export const useGet = <T> (endpoint: string, config?: AxiosRequestConfig) => {
                 url: endpoint,
                 method: 'GET',
                 headers:{
-                    'Authorization' : `Bearer ${Cookies.get('Authorization')}`,
+                    Authorization: `Bearer ${Cookies.get('Authorization')}`,
                     ...config?.headers
                 },
                 ...config
@@ -74,4 +74,70 @@ export const useGet = <T> (endpoint: string, config?: AxiosRequestConfig) => {
 
 
     return {data,loading,error,getData}
+}
+
+export const usePut = <T> (endpoint: string) => {
+    const [data, setData] = useState<T | null>(null)
+    const [loading, setloading ] = useState(false)
+    const [error, setError] = useState<number | null>(null)
+
+    const putData = async (putData: T, config?: AxiosRequestConfig) => {
+        setData(null)
+        setloading(true)
+        setError(null)
+
+        try{
+            console.log("URL final:", `${axioInstance.defaults.baseURL}${endpoint}`);
+            const response = await axioInstance({
+                url: endpoint,
+                method: 'PUT',
+                data: putData,
+                headers:{
+                    Authorization: `Bearer ${Cookies.get('Authorization')}`,
+                    'Content-Type' : 'application/json',
+                    ...config?.headers
+                },
+                ...config
+            })
+            setData(response.data)
+        }catch (e: any){
+            setError(e.response.status ?? 500)
+        }finally {
+            setloading(false)
+        }
+    }
+
+    return {data,loading,error,putData}
+}
+
+export const useDelete = <T> (endpoint: string) => {
+    const [data, setData] = useState<T | null>(null)
+    const [loading, setloading ] = useState(false)
+
+
+    const deleteData = async (config?: AxiosRequestConfig) => {
+        setData(null)
+        setloading(true)
+       
+
+        try{
+            console.log("URL final:", `${axioInstance.defaults.baseURL}${endpoint}`);
+            const response = await axioInstance({
+                url: endpoint,
+                method: 'DELETE',
+                headers:{
+                    Authorization: `Bearer ${Cookies.get('Authorization')}`,
+                    ...config?.headers
+                },
+                ...config
+            })
+            setData(response.data)
+        }catch (e: any){
+            throw e.response?.status
+        }finally {
+            setloading(false)
+        }
+    }
+
+    return {data,loading,deleteData}
 }
