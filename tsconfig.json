@@ -1,11 +1,12 @@
 {
   "compilerOptions": {
     "jsx": "react-jsx", 
-    "types": ["react"],
+    "types": ["react", "jest", "node"],
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"]
-    }
+    },
+    "esModuleInterop": true,
   },
   "files": [],
   "references": [
